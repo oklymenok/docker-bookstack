@@ -1,0 +1,45 @@
+version: '3'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    command: ["nginx", "-g", "daemon off;"]
+    depends_on:
+      - mysql
+    secrets:
+      - db_password
+    volumes:
+      - fpm_sock:/run/php/
+      - web_data:/var/www/html
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["/usr/sbin/php-fpm8.1", "-F", "-c", "/etc/php/8.1/fpm/"]
+    depends_on:
+      - mysql
+    secrets:
+      - db_password
+    volumes:
+      - fpm_sock:/run/php/
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: bookstack
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+secrets:
+  db_password:
+    file: .env
+volumes:
+  mysql_data:
+  fpm_sock:
+  web_data:
