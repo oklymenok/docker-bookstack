@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bookstack
+data:
+  app_key: "base64:fh/LQsJyMwPYX/wUtAH3pZiCd+j57hyDMZslBcqic4U="
+  app_url: "http://example.com:8080"
+  db_host: "docker-bookstack_mysql_1"
+  db_database: "bookstack"
+  db_username: "myuser"
+  db_password: "mypassword"
+  mail_driver: "smtp"
+  mail_from_name: "BookStack"
+  mail_from: "bookstack@example.com"
+  mail_host: "localhost"
+  mail_port: "587"
+  mail_username: "null"
+  mail_password: "null"
+  mail_encryption: "null"

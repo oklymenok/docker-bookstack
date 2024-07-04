@@ -22,3 +22,15 @@ php artisan migrate
 ```
 * Access web app by:
 127.0.0.1:8080/
+
+* Login with:
+```
+admin@admin.com
+password
+```
+
+* Upload to AWS ECR repo
+```
+docker buildx build . --platform linux/amd64 -t ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/bookstack/prod/nginx:latest --push
+docker buildx build . --platform linux/amd64 -t ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/bookstack/prod/php:latest --push
+```

@@ -36,8 +36,8 @@ RUN apt-get install \
 # php.ini fixes
 RUN sed -s 's/short_open_tag = Off/short_open_tag = On/g' -i /etc/php/8.1/fpm/php.ini
 
-RUN mkdir -p /var/www/html/log /var/www/html/tmp
-RUN chown www-data /var/www/html/log /var/www/html/tmp
+RUN mkdir -p /var/www/html/log /var/www/html/tmp /var/log/nginx/
+RUN chown www-data /var/www/html/log /var/www/html/tmp /var/log/nginx/
 RUN echo "<? phpinfo(); ?>" > /var/www/html/phpinfo.php
 
 RUN cd /var/www/html && \
@@ -52,4 +52,3 @@ RUN cd /var/www/html/BookStack && \
 
 COPY conf/etc/php/8.1/fpm/pool.d/www.conf /etc/php/8.1/fpm/pool.d/www.conf
 COPY conf/etc/nginx/sites-available/default /etc/nginx/sites-available/default 
-COPY .env /var/www/html/BookStack/.env

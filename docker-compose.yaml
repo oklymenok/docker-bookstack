@@ -20,6 +20,13 @@ services:
       context: .
       dockerfile: Dockerfile
     command: ["/usr/sbin/php-fpm8.1", "-F", "-c", "/etc/php/8.1/fpm/"]
+    environment:
+      APP_KEY: "base64:fh/LQsJyMwPYX/wUtAH3pZiCd+j57hyDMZslBcqic4U="
+      APP_URL: "http://example.com:8080"
+      DB_HOST: docker-bookstack_mysql_1
+      DB_DATABASE: bookstack
+      DB_USERNAME: myuser
+      DB_PASSWORD: mypassword
     depends_on:
       - mysql
     secrets:
